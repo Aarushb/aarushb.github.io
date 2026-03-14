@@ -1,0 +1,229 @@
+/* ---------- CSS VARIABLES ---------- */
+:root {
+    --bg-color: #121212;
+    --bg-alt: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --accent-color: #66b2ff;
+    --accent-hover: #3399ff;
+    --border-color: #333333;
+    --focus-color: #ffaa00;
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* ---------- RESET & BASE ---------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 1.125rem;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+/* ACCESSIBILITY: Strong focus outlines for keyboard navigation */
+*:focus-visible {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 4px;
+}
+
+/* ACCESSIBILITY: Skip to main content link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--focus-color);
+    color: #000;
+    padding: 8px;
+    z-index: 100;
+    font-weight: bold;
+}
+.skip-link:focus {
+    top: 0;
+}
+
+/* ---------- LAYOUT ---------- */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 80px 20px;
+}
+
+.bg-alt {
+    background-color: var(--bg-alt);
+    border-radius: 8px;
+}
+
+/* ---------- HEADER & NAV ---------- */
+.site-header {
+    background-color: var(--bg-alt);
+    border-bottom: 1px solid var(--border-color);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* ---------- TYPOGRAPHY ---------- */
+h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--accent-color);
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.bio p {
+    margin-bottom: 20px;
+    font-size: 1.15rem;
+}
+
+/* ---------- CARDS (PORTFOLIO) ---------- */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.card {
+    background-color: var(--bg-alt);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 25px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    border-color: var(--accent-color);
+}
+
+.card .role {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    font-family: monospace;
+}
+
+.card ul {
+    margin-top: 15px;
+    margin-left: 20px;
+    color: var(--text-secondary);
+}
+
+.card li {
+    margin-bottom: 8px;
+}
+
+.card-links {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* ---------- SKILLS ---------- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.skill-category h3 {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+
+/* ---------- CONTACT ---------- */
+.contact-list {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.contact-list li {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+/* ---------- FOOTER ---------- */
+.site-footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+    margin-top: 40px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Aarush Bhat - Computing Science Student, Accessibility Engineer, and AI Enthusiast.">
+    <title>Aarush Bhat | Software & Accessibility Engineer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Accessibility feature: Skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container header-content">
+            <div class="logo">Aarush Bhat</div>
+            <nav aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- HERO / ABOUT SECTION -->
+        <section id="about" class="container section">
+            <h1>Hi, I'm Aarush.</h1>
+            <p class="subtitle">Computing Science Student & Accessibility Engineer</p>
+            <div class="bio">
+                <p>
+                    I am a student of the subtle and beautiful arts of computing science—exploring software engineering, Artificial Intelligence, and systems architecture at the University of Alberta. 
+                </p>
+                <p>
+                    Technology intersects with almost every aspect of modern life. For me, it is the primary mechanism I use to navigate and reshape the world. Driven by a lifelong journey of breaking systemic barriers, I believe that technology, if utilized with thoughtfulness, has the potential to dismantle exclusion. My work focuses heavily on the intersection of <strong>Technical Innovation</strong> and <strong>Accessibility</strong>, building tools to ensure the generation after me does not have to face the same barriers I did.
+                </p>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO SECTION -->
+        <section id="portfolio" class="container section">
+            <h2>Featured Work</h2>
+            <p>A selection of systems, tools, and experiences I've engineered.</p>
+            
+            <div class="grid">
+                <!-- Project 1 -->
+                <article class="card">
+                    <h3>VedAI</h3>
+                    <p class="role">Co-Founder & Lead Developer</p>
+                    <p>
+                        A universal document accessibility platform. I architected the production backend using FastAPI, PostgreSQL, and proprietary OCR pipelines to convert inaccessible PDFs into structured, screen-reader-friendly HTML.
+                    </p>
+                    <ul>
+                        <li>Processed 50,000+ pages with 95%+ structural accuracy.</li>
+                        <li>Deployed custom-trained vision models for interactive image exploration.</li>
+                    </ul>
+                    <div class="card-links">
+                        <a href="https://vedai.co" target="_blank" rel="noopener noreferrer" aria-label="Visit VedAI website">Visit VedAI &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="card">
+                    <h3>Polyglot-LLM</h3>
+                    <p class="role">Open Source Creator</p>
+                    <p>
+                        An NVDA screen reader add-on integrating Google Gemini Flash and Local LLMs to break language barriers for a global community of 250,000+ visually impaired users.
+                    </p>
+                    <ul>
+                        <li>Achieved sub-500ms latency via an asynchronous clipboard streaming pipeline.</li>
+                        <li>Implemented multi-tiered caching, reducing API token usage by ~40%.</li>
+                    </ul>
+                    <div class="card-links">
+                        <a href="https://github.com/Aarushb/polyglot-LLM" target="_blank" rel="noopener noreferrer" aria-label="View Polyglot-LLM on GitHub">View Source &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="card">
+                    <h3>Rhythm & Hue</h3>
+                    <p class="role">Game Developer (NAT Ignite Hackathon - 2nd Place)</p>
+                    <p>
+                        An accessible, gamified Progressive Web App (PWA) designed to encourage physiotherapy adherence. Built in 48 hours using JavaScript, the Web Audio API, and DeviceMotion events.
+                    </p>
+                    <ul>
+                        <li>Engineered a repetition-detection algorithm utilizing Low-Pass Filters (95% accuracy).</li>
+                        <li>Developed a dual-feedback system: visual HTML5 Canvas rendering and dynamic audio BPM scaling based on physical movement velocity.</li>
+                    </ul>
+                    <div class="card-links">
+                        <a href="https://artur-bertash.github.io/test-natIgnite/" target="_blank" rel="noopener noreferrer" aria-label="Play Rhythm and Hue">Play Game &rarr;</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="container section bg-alt">
+            <h2>Technical Arsenal</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <p>Python, JavaScript/TypeScript, C++, C, SQL, Rust, Bash</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Web & Backend</h3>
+                    <p>FastAPI, React, Node.js, Astro, Docker, Redis, PostgreSQL, SQLAlchemy</p>
+                </div>
+                <div class="skill-category">
+                    <h3>AI & Data</h3>
+                    <p>PyTorch, TensorFlow, Transformers (BERT), LangChain, RAG, Pandas, MediaPipe</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Accessibility</h3>
+                    <p>WCAG 2.1, ARIA, NVDA Add-on API, IAccessible2, Web Audio API, MathML</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="container section">
+            <h2>Let's Connect</h2>
+            <p>Whether you want to discuss software engineering, accessibility initiatives, or machine learning, my inbox is open.</p>
+            <ul class="contact-list">
+                <li><a href="mailto:aarush.bhat04@gmail.com">aarush.bhat04@gmail.com</a></li>
+                <li><a href="https://linkedin.com/in/aarushdev" target="_blank" rel="noopener noreferrer">LinkedIn: /in/aarushdev</a></li>
+                <li><a href="https://github.com/aarushb" target="_blank" rel="noopener noreferrer">GitHub: @aarushb</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Aarush Bhat. Engineered for accessibility and speed.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
