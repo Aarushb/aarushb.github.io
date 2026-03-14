@@ -1,8 +1,31 @@
 {
-  "commits": 609,
+  "totalContributions": 622,
+  "commits": 613,
   "prs": 9,
   "issues": 0,
   "contributedTo": 24,
+  "ownedRepos": {
+    "public": 20,
+    "private": 19
+  },
+  "topRepositories": [
+    {
+      "name": "website",
+      "commits": 149
+    },
+    {
+      "name": "Private Repository",
+      "commits": 100
+    },
+    {
+      "name": "Private Repository",
+      "commits": 53
+    },
+    {
+      "name": "Private Repository",
+      "commits": 46
+    }
+  ],
   "languages": [
     {
       "name": "Python",
