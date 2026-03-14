@@ -213,7 +213,7 @@
             </div>
         </section>
 
-        <!-- GITHUB STATS SECTION (ACCESSIBILITY OPTIMIZED VIA JS FETCH) -->
+        <!-- GITHUB STATS SECTION (ACCESSIBILITY OPTIMIZED VIA CORS PROXY) -->
         <section id="github-stats" class="container section">
             <h2>GitHub Activity</h2>
             <p>A live look at my recent commits, pull requests, and the languages I write in the most.</p>
@@ -256,53 +256,52 @@
         </div>
     </footer>
 
-    <!-- SCRIPT FOR DYNAMIC ACCESSIBLE GITHUB STATS -->
+    <!-- SCRIPT FOR DYNAMIC ACCESSIBLE GITHUB STATS (CORS BYPASS) -->
     <script>
-        /**
-         * This script fetches the live SVGs from github-readme-stats, 
-         * extracts the raw text nodes (which contain the real-time numbers/percentages), 
-         * and injects them cleanly into the aria-live region for screen readers.
-         */
         async function loadAccessibleStats() {
+            const srContainer = document.getElementById('sr-github-stats');
             try {
                 const statsUrl = document.getElementById('stats-img').src;
                 const langsUrl = document.getElementById('langs-img').src;
 
-                // Fetch both SVGs directly
-                const [statsRes, langsRes] = await Promise.all([
-                    fetch(statsUrl),
-                    fetch(langsUrl)
+                // We use allorigins.win to bypass CORS restrictions imposed by the browser
+                const fetchProxy = async (url) => {
+                    const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+                    if (!res.ok) throw new Error('Proxy fetch failed');
+                    const data = await res.json();
+                    return data.contents; // This contains the raw SVG text
+                };
+
+                // Fetch both SVGs through the proxy concurrently
+                const [statsSvg, langsSvg] = await Promise.all([
+                    fetchProxy(statsUrl),
+                    fetchProxy(langsUrl)
                 ]);
 
-                const statsSvg = await statsRes.text();
-                const langsSvg = await langsRes.text();
-
+                // Parse the returned SVG data into virtual DOM documents
                 const parser = new DOMParser();
                 const statsDoc = parser.parseFromString(statsSvg, 'image/svg+xml');
                 const langsDoc = parser.parseFromString(langsSvg, 'image/svg+xml');
 
-                // Extract and clean all text nodes from the SVGs
+                // Extract text directly from the SVG <text> elements
                 const extractText = (doc) => {
                     return Array.from(doc.querySelectorAll('text'))
                         .map(t => t.textContent.trim())
                         .filter(t => t.length > 0)
-                        .join(' ');
+                        .join(', '); 
                 };
 
                 const statsText = extractText(statsDoc);
                 const langsText = extractText(langsDoc);
 
                 // Inject the live data into the SR-only div
-                document.getElementById('sr-github-stats').textContent = 
-                    "Live Data: " + statsText + ". " + langsText;
+                srContainer.textContent = "Live Data Successfully Loaded. Stats: " + statsText + ". Languages: " + langsText + ".";
             } catch (error) {
-                // Graceful fallback if the API fails or is rate-limited
-                document.getElementById('sr-github-stats').textContent = 
-                    "Live GitHub stats available at github.com/aarushb";
+                console.error("Failed to parse GitHub stats:", error);
+                srContainer.textContent = "Unable to load live stats via API. Please use the link below to view my GitHub profile.";
             }
         }
         
-        // Run on load
         loadAccessibleStats();
     </script>
 </body>
