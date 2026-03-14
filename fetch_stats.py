@@ -12,6 +12,14 @@ def fetch_github_stats():
 
     headers = {"Authorization": f"Bearer {TOKEN}"}
     
+    # 1. Fetch User Repo Counts (REST API is easiest for this)
+    user_response = requests.get('https://api.github.com/user', headers=headers)
+    user_data = user_response.json()
+    
+    public_repos_count = user_data.get('public_repos', 0)
+    private_repos_count = user_data.get('total_private_repos', 0)
+
+    # 2. Fetch Contributions & Top Repos (GraphQL API)
     query = """
     {
       user(login: "%s") {
@@ -20,6 +28,16 @@ def fetch_github_stats():
           totalPullRequestContributions
           totalIssueContributions
           totalRepositoriesWithContributedCommits
+          restrictedContributionsCount
+          commitContributionsByRepository(maxRepositories: 4) {
+            repository {
+              name
+              isPrivate
+            }
+            contributions {
+              totalCount
+            }
+          }
         }
       }
     }
@@ -28,38 +46,57 @@ def fetch_github_stats():
     response = requests.post('https://api.github.com/graphql', json={'query': query}, headers=headers)
     data = response.json()
     
-    # Handle auth errors from the REST wrapper
     if "message" in data:
         print(f"API Error: {data['message']}")
         return
         
-    # Handle query errors from GraphQL
     if "errors" in data:
         print(f"GraphQL Error: {data['errors']}")
         return
 
-    # Safely parse the nested GraphQL data
     try:
         contribs = data["data"]["user"]["contributionsCollection"]
     except KeyError as e:
         print(f"Unexpected JSON structure. Missing key: {e}")
         return
     
-    repos_response = requests.get(f'https://api.github.com/users/{USERNAME}/repos?per_page=100')
+    # Calculate True Total Contributions (matches your GitHub Profile)
+    # restrictedContributionsCount represents private activity
+    total_contributions = (
+        contribs["totalCommitContributions"] + 
+        contribs["totalPullRequestContributions"] + 
+        contribs["totalIssueContributions"] +
+        contribs.get("restrictedContributionsCount", 0)
+    )
+
+    # Process the top contributed repositories securely
+    top_repos_list = []
+    for repo_node in contribs.get("commitContributionsByRepository", []):
+        repo_info = repo_node["repository"]
+        count = repo_node["contributions"]["totalCount"]
+        
+        if repo_info["isPrivate"]:
+            top_repos_list.append({"name": "Private Repository", "commits": count})
+        else:
+            top_repos_list.append({"name": repo_info["name"], "commits": count})
+
+    # 3. Fetch Top Languages (REST API)
+    repos_response = requests.get(f'https://api.github.com/users/{USERNAME}/repos?per_page=100', headers=headers)
     repos = repos_response.json()
     
     lang_counts = {}
     total_repos_with_lang = 0
     
-    for repo in repos:
-        if repo.get("language"):
-            lang = repo["language"]
-            lang_counts[lang] = lang_counts.get(lang, 0) + 1
-            total_repos_with_lang += 1
+    # Ensure repos is a list to avoid breaking if the API hits a limit
+    if isinstance(repos, list):
+        for repo in repos:
+            if repo.get("language"):
+                lang = repo["language"]
+                lang_counts[lang] = lang_counts.get(lang, 0) + 1
+                total_repos_with_lang += 1
 
     top_langs = sorted(lang_counts.items(), key=lambda x: x[1], reverse=True)[:3]
     
-    # Avoid division by zero if no repositories have languages detected
     if total_repos_with_lang > 0:
         languages_formatted = [
             {
@@ -71,18 +108,25 @@ def fetch_github_stats():
     else:
         languages_formatted = []
 
+    # 4. Compile the ultimate nerdy JSON structure
     stats = {
+        "totalContributions": total_contributions,
         "commits": contribs["totalCommitContributions"],
         "prs": contribs["totalPullRequestContributions"],
         "issues": contribs["totalIssueContributions"],
         "contributedTo": contribs["totalRepositoriesWithContributedCommits"],
+        "ownedRepos": {
+            "public": public_repos_count,
+            "private": private_repos_count
+        },
+        "topRepositories": top_repos_list,
         "languages": languages_formatted
     }
 
     with open("github-stats.json", "w") as f:
         json.dump(stats, f, indent=2)
         
-    print("Successfully updated github-stats.json")
+    print("Successfully updated github-stats.json with advanced stats!")
 
 if __name__ == "__main__":
     fetch_github_stats()
