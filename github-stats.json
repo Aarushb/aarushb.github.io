@@ -1,0 +1,20 @@
+{
+  "commits": 609,
+  "prs": 9,
+  "issues": 0,
+  "contributedTo": 24,
+  "languages": [
+    {
+      "name": "Python",
+      "percentage": 70.0
+    },
+    {
+      "name": "HTML",
+      "percentage": 10.0
+    },
+    {
+      "name": "Svelte",
+      "percentage": 10.0
+    }
+  ]
+}
