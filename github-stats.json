@@ -1,12 +1,12 @@
 {
-  "totalContributions": 725,
-  "commits": 714,
+  "totalContributions": 726,
+  "commits": 715,
   "prs": 11,
   "issues": 0,
   "contributedTo": 26,
   "ownedRepos": {
-    "public": 21,
-    "private": 20
+    "public": 22,
+    "private": 19
   },
   "topRepositories": [
     {
@@ -22,22 +22,22 @@
       "commits": 75
     },
     {
-      "name": "Private Repository",
-      "commits": 53
+      "name": "hack_ed_2026",
+      "commits": 54
     }
   ],
   "languages": [
     {
       "name": "Python",
-      "percentage": 70.0
+      "percentage": 63.6
     },
     {
       "name": "HTML",
-      "percentage": 10.0
+      "percentage": 9.1
     },
     {
       "name": "Svelte",
-      "percentage": 10.0
+      "percentage": 9.1
     }
   ]
 }
