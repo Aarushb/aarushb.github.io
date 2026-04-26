@@ -5,8 +5,8 @@
   "issues": 0,
   "contributedTo": 27,
   "ownedRepos": {
-    "public": 22,
-    "private": 20
+    "public": 23,
+    "private": 19
   },
   "topRepositories": [
     {
@@ -29,15 +29,15 @@
   "languages": [
     {
       "name": "Python",
-      "percentage": 63.6
+      "percentage": 58.3
+    },
+    {
+      "name": "TypeScript",
+      "percentage": 16.7
     },
     {
       "name": "HTML",
-      "percentage": 9.1
-    },
-    {
-      "name": "Svelte",
-      "percentage": 9.1
+      "percentage": 8.3
     }
   ]
 }
