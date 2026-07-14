@@ -1,6 +1,6 @@
 {
-  "totalContributions": 682,
-  "commits": 671,
+  "totalContributions": 673,
+  "commits": 662,
   "prs": 11,
   "issues": 0,
   "contributedTo": 24,
@@ -15,7 +15,7 @@
     },
     {
       "name": "website",
-      "commits": 107
+      "commits": 98
     },
     {
       "name": "Private Repository",
