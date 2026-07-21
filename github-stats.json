@@ -1,9 +1,9 @@
 {
-  "totalContributions": 676,
-  "commits": 664,
+  "totalContributions": 665,
+  "commits": 653,
   "prs": 12,
   "issues": 0,
-  "contributedTo": 24,
+  "contributedTo": 25,
   "ownedRepos": {
     "public": 26,
     "private": 20
@@ -15,7 +15,7 @@
     },
     {
       "name": "website",
-      "commits": 98
+      "commits": 95
     },
     {
       "name": "Private Repository",
