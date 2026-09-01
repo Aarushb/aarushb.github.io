@@ -1,9 +1,9 @@
 {
-  "totalContributions": 644,
-  "commits": 632,
+  "totalContributions": 638,
+  "commits": 626,
   "prs": 12,
   "issues": 0,
-  "contributedTo": 23,
+  "contributedTo": 22,
   "ownedRepos": {
     "public": 26,
     "private": 20
@@ -14,12 +14,12 @@
       "commits": 160
     },
     {
-      "name": "website",
-      "commits": 76
-    },
-    {
       "name": "Private Repository",
       "commits": 75
+    },
+    {
+      "name": "website",
+      "commits": 71
     },
     {
       "name": "hack_ed_2026",
