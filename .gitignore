@@ -210,3 +210,4 @@ __marimo__/
 cache/
 .doit.db*
 __invalidated__
+output/
