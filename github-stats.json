@@ -5,7 +5,7 @@
   "issues": 0,
   "contributedTo": 23,
   "ownedRepos": {
-    "public": 28,
+    "public": 29,
     "private": 20
   },
   "topRepositories": [
@@ -29,15 +29,15 @@
   "languages": [
     {
       "name": "Python",
-      "percentage": 46.7
+      "percentage": 43.8
     },
     {
       "name": "Kotlin",
-      "percentage": 13.3
+      "percentage": 18.8
     },
     {
       "name": "TypeScript",
-      "percentage": 13.3
+      "percentage": 12.5
     }
   ]
 }
