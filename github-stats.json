@@ -1,12 +1,12 @@
 {
-  "totalContributions": 1044,
-  "commits": 1030,
+  "totalContributions": 1096,
+  "commits": 1082,
   "prs": 14,
   "issues": 0,
-  "contributedTo": 28,
+  "contributedTo": 31,
   "ownedRepos": {
-    "public": 30,
-    "private": 22
+    "public": 31,
+    "private": 25
   },
   "topRepositories": [
     {
@@ -22,7 +22,7 @@
       "commits": 56
     },
     {
-      "name": "lazykola-a11y",
+      "name": "hack_ed_2026",
       "commits": 54
     }
   ],
