@@ -1,6 +1,6 @@
 {
-  "totalContributions": 1096,
-  "commits": 1082,
+  "totalContributions": 1158,
+  "commits": 1144,
   "prs": 14,
   "issues": 0,
   "contributedTo": 31,
@@ -18,12 +18,12 @@
       "commits": 160
     },
     {
-      "name": "website",
-      "commits": 56
+      "name": "Private Repository",
+      "commits": 61
     },
     {
-      "name": "hack_ed_2026",
-      "commits": 54
+      "name": "website",
+      "commits": 56
     }
   ],
   "languages": [
