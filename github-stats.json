@@ -1,12 +1,12 @@
 {
-  "totalContributions": 3089,
-  "commits": 3063,
-  "prs": 16,
+  "totalContributions": 3222,
+  "commits": 3190,
+  "prs": 22,
   "issues": 10,
-  "contributedTo": 46,
+  "contributedTo": 48,
   "ownedRepos": {
     "public": 37,
-    "private": 35
+    "private": 37
   },
   "topRepositories": [
     {
@@ -19,7 +19,7 @@
     },
     {
       "name": "Private Repository",
-      "commits": 296
+      "commits": 316
     },
     {
       "name": "Private Repository",
@@ -29,15 +29,15 @@
   "languages": [
     {
       "name": "Python",
-      "percentage": 31.6
+      "percentage": 30.0
     },
     {
       "name": "Kotlin",
-      "percentage": 21.1
+      "percentage": 25.0
     },
     {
       "name": "TypeScript",
-      "percentage": 10.5
+      "percentage": 10.0
     }
   ]
 }
