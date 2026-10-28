@@ -1,11 +1,11 @@
 {
-  "totalContributions": 4754,
-  "commits": 4676,
-  "prs": 68,
+  "totalContributions": 4868,
+  "commits": 4787,
+  "prs": 71,
   "issues": 10,
   "contributedTo": 49,
   "ownedRepos": {
-    "public": 37,
+    "public": 38,
     "private": 38
   },
   "topRepositories": [
@@ -29,15 +29,15 @@
   "languages": [
     {
       "name": "Python",
-      "percentage": 30.0
+      "percentage": 28.6
     },
     {
       "name": "Kotlin",
-      "percentage": 25.0
+      "percentage": 28.6
     },
     {
       "name": "TypeScript",
-      "percentage": 10.0
+      "percentage": 9.5
     }
   ]
 }
