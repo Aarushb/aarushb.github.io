@@ -1303,7 +1303,7 @@ BODY_END = """
     <button id="shortcuts-close-btn" type="submit" class="btn btn-sm btn-primary">Close</button>
   </form>
 </dialog>
-<script src="/assets/js/portfolio-a11y.js" defer></script>
+<script src="/assets/js/portfolio-a11y.js"></script>
 """
 
 # The possibility to extract metadata from the filename by using a
@@ -1418,7 +1418,7 @@ EXTRA_THEMES_DIRS = []
 # past.  Useful especially if your post titles are in <h1> tags too, for
 # example.
 # (defaults to 1.)
-# DEMOTE_HEADERS = 1
+DEMOTE_HEADERS = 0
 
 # If you don’t like slugified file names ([a-z0-9] and a literal dash),
 # and would prefer to use all the characters your file system allows.

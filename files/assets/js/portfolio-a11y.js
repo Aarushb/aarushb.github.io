@@ -107,6 +107,37 @@
 
   // --- 2. Keyboard Shortcut Router & ARIA Live Announcer ---
   document.addEventListener("DOMContentLoaded", () => {
+    // When a page hides its title (.. hidetitle: True), <header> has no <h2>,
+    // so content sections should start at <h2> directly under the navbar <h1>
+    // (and card items at <h3>) rather than being shifted to <h3>/<h4>.
+    document.querySelectorAll(".entry-content").forEach((container) => {
+      const article = container.closest("article");
+      const hasHeaderTitle = article && article.querySelector("header h1, header h2, header .entry-title");
+      if (hasHeaderTitle) return;
+
+      const headings = Array.from(container.querySelectorAll("h1, h2, h3, h4, h5, h6"));
+      if (headings.length === 0) return;
+
+      const minLevel = Math.min(...headings.map((h) => parseInt(h.tagName.charAt(1), 10)));
+      const offset = 2 - minLevel;
+      if (offset === 0) return;
+
+      headings.forEach((h) => {
+        const currentLevel = parseInt(h.tagName.charAt(1), 10);
+        const newLevel = Math.min(6, Math.max(1, currentLevel + offset));
+        if (newLevel === currentLevel) return;
+
+        const replacement = document.createElement("h" + newLevel);
+        Array.from(h.attributes).forEach((attr) => {
+          replacement.setAttribute(attr.name, attr.value);
+        });
+        while (h.firstChild) {
+          replacement.appendChild(h.firstChild);
+        }
+        h.parentNode.replaceChild(replacement, h);
+      });
+    });
+
     const synth = new EarconSynth();
     const items = Array.from(document.querySelectorAll(".portfolio-item"));
     const announcer = document.getElementById("a11y-announcer");
