@@ -146,16 +146,6 @@
     const openHelpBtn = document.getElementById("shortcuts-open-btn");
     const closeHelpBtn = document.getElementById("shortcuts-close-btn");
 
-    // Link each card to its heading for screen reader name resolution
-    items.forEach((item, idx) => {
-      const title = item.querySelector("h2, h3, h4, h5, h6");
-      if (title) {
-        const headingId = title.id || `portfolio-item-heading-${idx}`;
-        title.id = headingId;
-        item.setAttribute("aria-labelledby", headingId);
-      }
-    });
-
     const sectionMap = {
       "1": "experience",
       "2": "projects",

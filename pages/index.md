@@ -31,7 +31,7 @@
 <section id="experience" aria-labelledby="heading-experience" class="mb-5">
   <h2 id="heading-experience">Experience &amp; Funded R&amp;D</h2>
 
-  <article class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
+  <div class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
     <div class="card-body">
       <h3>Lead Software Engineering Intern &mdash; Kerr Interior Systems</h3>
       <p class="text-muted">Sep 2026 &ndash; Present &middot; Edmonton, AB</p>
@@ -43,9 +43,9 @@
         <li>Built automated payroll and data reconciliation pipelines linking field estimating records to accounting exports.</li>
       </ul>
     </div>
-  </article>
+  </div>
 
-  <article class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
+  <div class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
     <div class="card-body">
       <h3>Principal Investigator &mdash; UAlberta Undergraduate Research Initiative (URI)</h3>
       <p class="text-muted">May 2026 &ndash; Present &middot; $7,500 Max-Tier Research Grant &middot; TUG 2026 Speaker</p>
@@ -57,9 +57,9 @@
         <li>Built programmatic Python bridges for inaccessible coursework GUIs (including Entity-Relationship Diagram generation replacing draw.io) and evaluated 3D-printed haptics versus 2D swell paper.</li>
       </ul>
     </div>
-  </article>
+  </div>
 
-  <article class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
+  <div class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
     <div class="card-body">
       <h3>Co-Founder &amp; Lead Developer &mdash; VedAI</h3>
       <p class="text-muted">Oct 2023 &ndash; Sep 2026 &middot; Python, FastAPI, React, PostgreSQL</p>
@@ -70,9 +70,9 @@
         <li>Deployed custom-trained vision models for inline diagram descriptions alongside a grid-based spatial explorer allowing screen-reader users to inspect visual layouts by coordinate.</li>
       </ul>
     </div>
-  </article>
+  </div>
 
-  <article class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
+  <div class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
     <div class="card-body">
       <h3>Vice President of Technology &mdash; U of A AI Society (UAIS)</h3>
       <p class="text-muted">Oct 2023 &ndash; May 2026 &middot; Edmonton, AB</p>
@@ -80,13 +80,13 @@
         Directed technical strategy and agile student engineering teams for a 700+ member AI organization, organizing joint workshops with Amii and AltaML and shipping deployed community tools.
       </p>
     </div>
-  </article>
+  </div>
 </section>
 
 <section id="projects" aria-labelledby="heading-projects" class="mb-5">
   <h2 id="heading-projects">Selected Systems &amp; Engineering</h2>
 
-  <article class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
+  <div class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
     <div class="card-body">
       <h3>RISC-Free</h3>
       <p class="text-muted">Rust &middot; Win32 UI Automation &middot; wxDragon &middot; Prism</p>
@@ -99,9 +99,9 @@
       </ul>
       <p><a href="https://github.com/Aarushb/riscfree">Source Code &amp; Architecture (GitHub)</a></p>
     </div>
-  </article>
+  </div>
 
-  <article class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
+  <div class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
     <div class="card-body">
       <h3>SpeakSync</h3>
       <p class="text-muted">Python 3.11+ &middot; Win32 / IUIAutomation &middot; Linux D-Bus &middot; macOS JXA &middot; Prism</p>
@@ -114,9 +114,9 @@
       </ul>
       <p><a href="https://github.com/Aarushb/speak-sync">GitHub Repository &amp; Multi-OS Releases</a></p>
     </div>
-  </article>
+  </div>
 
-  <article class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
+  <div class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
     <div class="card-body">
       <h3>Northstar</h3>
       <p class="text-muted">Python &middot; FastAPI &middot; WebSockets &middot; Gemini Live API &middot; Web Audio (HRTF) &middot; 1st Place, EU Launchpad</p>
@@ -132,9 +132,9 @@
         <span class="text-muted">(Core production repository is private startup IP)</span>
       </p>
     </div>
-  </article>
+  </div>
 
-  <article class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
+  <div class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
     <div class="card-body">
       <h3>UAIS Production Anti-Spam Bot</h3>
       <p class="text-muted">Python &middot; PyTorch &middot; Hugging Face BERT &middot; Asyncio</p>
@@ -146,13 +146,13 @@
       </ul>
       <p><a href="https://github.com/UndergraduateArtificialIntelligenceClub/Spam-Detection-Discord-Bot">GitHub Repository</a></p>
     </div>
-  </article>
+  </div>
 </section>
 
 <section id="open-source" aria-labelledby="heading-oss" class="mb-5">
   <h2 id="heading-oss">Upstream Open-Source Contributions</h2>
 
-  <article class="card mb-3 portfolio-item" data-section="Open Source" tabindex="-1">
+  <div class="card mb-3 portfolio-item" data-section="Open Source" tabindex="-1">
     <div class="card-body">
       <h3>Ren'Py Visual Novel Engine (Official v8.6.0 Release)</h3>
       <p class="text-muted">Python &middot; Cython &middot; Prism Accessibility Bridge</p>
@@ -163,9 +163,9 @@
         <a href="https://www.renpy.org/release/8.6.0" rel="noopener">Ren'Py 8.6.0 Official Release Notes</a>
       </p>
     </div>
-  </article>
+  </div>
 
-  <article class="card mb-3 portfolio-item" data-section="Open Source" tabindex="-1">
+  <div class="card mb-3 portfolio-item" data-section="Open Source" tabindex="-1">
     <div class="card-body">
       <h3>Streamer LAN Audio Server (Merged PR #3 &mdash; +1,877 Lines)</h3>
       <p class="text-muted">Python &middot; FastAPI &middot; Server-Sent Events &middot; Web Audio API &middot; FFmpeg</p>
@@ -176,12 +176,12 @@
         <a href="https://github.com/stevo399/streamer/pull/3" rel="noopener">Merged Pull Request #3</a>
       </p>
     </div>
-  </article>
+  </div>
 </section>
 
 <section id="skills" aria-labelledby="heading-skills" class="mb-5">
   <h2 id="heading-skills">Technical Stack &amp; Honors</h2>
-  <article class="card mb-3 portfolio-item" data-section="Skills" tabindex="-1">
+  <div class="card mb-3 portfolio-item" data-section="Skills" tabindex="-1">
     <div class="card-body">
       <h3>Core Competencies &amp; Recognition</h3>
       <ul>
@@ -191,5 +191,5 @@
         <li><strong>Honors:</strong> 1st Place EU Launchpad (<em>Northstar</em>), 1st Place AWS DevCon (<em>GuardReady</em>), 2nd Place natIgnite (<em>Rhythm &amp; Hue</em>), 3rd Place UAlberta CHADS CTF, $7,500 URI Research Grant, UAlberta International Entrance Scholarship, NTSE Scholar (Top 0.1% in India)</li>
       </ul>
     </div>
-  </article>
+  </div>
 </section>
