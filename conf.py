@@ -1290,6 +1290,7 @@ dialog#shortcuts-dialog::backdrop {
 """
 
 BODY_END = """
+<div id="a11y-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 <dialog id="shortcuts-dialog" aria-labelledby="shortcuts-title">
   <h2 id="shortcuts-title">Keyboard Navigation Shortcuts</h2>
   <p>Single-key shortcuts work anywhere outside text inputs:</p>

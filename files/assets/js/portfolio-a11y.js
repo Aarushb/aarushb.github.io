@@ -155,12 +155,17 @@
 
     let currentIndex = -1;
     let lastFocusedBeforeModal = null;
+    let announceClearTimer = null;
 
     function announce(text) {
       if (!announcer) return;
+      if (announceClearTimer) clearTimeout(announceClearTimer);
       announcer.textContent = "";
       requestAnimationFrame(() => {
         announcer.textContent = text;
+        announceClearTimer = setTimeout(() => {
+          announcer.textContent = "";
+        }, 1500);
       });
     }
 

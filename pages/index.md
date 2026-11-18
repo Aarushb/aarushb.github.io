@@ -5,8 +5,6 @@
 .. type: text
 -->
 
-<div id="a11y-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-
 <section aria-labelledby="hero-heading" class="mb-5">
   <h1 id="hero-heading">Systems, AI Agent, &amp; Accessibility Engineer</h1>
   <p class="lead">
