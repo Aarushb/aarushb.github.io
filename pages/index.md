@@ -188,21 +188,3 @@
     <li><strong>Honors:</strong> 1st Place EU Launchpad (<em>Northstar</em>), 1st Place AWS DevCon (<em>GuardReady</em>), 2nd Place natIgnite (<em>Rhythm &amp; Hue</em>), 3rd Place UAlberta CHADS CTF, $7,500 URI Research Grant, UAlberta International Entrance Scholarship, NTSE Scholar (Top 0.1% in India)</li>
   </ul>
 </section>
-
-<dialog id="shortcuts-dialog" aria-labelledby="shortcuts-title">
-  <h2 id="shortcuts-title">Keyboard Navigation Shortcuts</h2>
-  <p>Single-key shortcuts work anywhere outside text inputs:</p>
-  <ul>
-    <li><kbd>J</kbd> / <kbd>K</kbd> &mdash; Move to next / previous item across all sections</li>
-    <li><kbd>1</kbd> &mdash; Jump to Experience &amp; Funded R&amp;D</li>
-    <li><kbd>2</kbd> &mdash; Jump to Selected Systems &amp; Engineering</li>
-    <li><kbd>3</kbd> &mdash; Jump to Upstream Open-Source Contributions</li>
-    <li><kbd>4</kbd> &mdash; Jump to Technical Stack &amp; Honors</li>
-    <li><kbd>M</kbd> &mdash; Toggle synthesized spatial audio cues On / Off</li>
-    <li><kbd>G</kbd> / <kbd>L</kbd> / <kbd>R</kbd> &mdash; Focus GitHub, LinkedIn, or Resume link</li>
-    <li><kbd>?</kbd> or <kbd>Esc</kbd> &mdash; Close this shortcut dialog</li>
-  </ul>
-  <form method="dialog" class="mt-3 text-right">
-    <button id="shortcuts-close-btn" type="submit" class="btn btn-sm btn-primary">Close</button>
-  </form>
-</dialog>
