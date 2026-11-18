@@ -202,5 +202,7 @@
     <li><kbd>G</kbd> / <kbd>L</kbd> / <kbd>R</kbd> &mdash; Focus GitHub, LinkedIn, or Resume link</li>
     <li><kbd>?</kbd> or <kbd>Esc</kbd> &mdash; Close this shortcut dialog</li>
   </ul>
-  <button id="shortcuts-close-btn" type="button" class="btn btn-sm btn-primary">Close</button>
+  <form method="dialog" class="mt-3 text-right">
+    <button id="shortcuts-close-btn" type="submit" class="btn btn-sm btn-primary">Close</button>
+  </form>
 </dialog>

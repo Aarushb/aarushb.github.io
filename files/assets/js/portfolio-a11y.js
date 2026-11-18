@@ -216,20 +216,27 @@
       if (!dialog) return;
       lastFocusedBeforeModal = document.activeElement;
       if (typeof dialog.showModal === "function") {
-        dialog.showModal();
+        try {
+          dialog.showModal();
+        } catch (e) {
+          dialog.setAttribute("open", "");
+        }
       } else {
         dialog.setAttribute("open", "");
       }
       synth.playModalCue(true);
+      const closeBtn = document.getElementById("shortcuts-close-btn");
+      if (closeBtn) closeBtn.focus();
     }
 
     function closeHelpModal() {
       if (!dialog) return;
-      if (typeof dialog.close === "function") {
-        dialog.close();
-      } else {
-        dialog.removeAttribute("open");
-      }
+      try {
+        if (dialog.open) {
+          dialog.close();
+        }
+      } catch (e) {}
+      dialog.removeAttribute("open");
       synth.playModalCue(false);
       if (lastFocusedBeforeModal && typeof lastFocusedBeforeModal.focus === "function") {
         lastFocusedBeforeModal.focus();
@@ -245,12 +252,27 @@
     }
 
     if (openHelpBtn) openHelpBtn.addEventListener("click", openHelpModal);
-    if (closeHelpBtn) closeHelpBtn.addEventListener("click", closeHelpModal);
+    if (closeHelpBtn) {
+      closeHelpBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeHelpModal();
+      });
+    }
 
     if (dialog) {
       dialog.addEventListener("close", () => {
         if (lastFocusedBeforeModal && typeof lastFocusedBeforeModal.focus === "function") {
           lastFocusedBeforeModal.focus();
+        }
+      });
+      dialog.addEventListener("click", (e) => {
+        const rect = dialog.getBoundingClientRect();
+        const isInDialog = (
+          rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+          rect.left <= e.clientX && e.clientX <= rect.left + rect.width
+        );
+        if (!isInDialog) {
+          closeHelpModal();
         }
       });
     }

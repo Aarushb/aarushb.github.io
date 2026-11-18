@@ -1261,6 +1261,12 @@ EXTRA_HEAD_DATA = """
 .portfolio-item h3:focus {
   outline: none;
 }
+dialog#shortcuts-dialog:not([open]) {
+  display: none !important;
+}
+dialog#shortcuts-dialog[open] {
+  display: block;
+}
 dialog#shortcuts-dialog {
   border-radius: var(--site-radius);
   border: 1px solid var(--site-accent);
