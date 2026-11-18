@@ -326,7 +326,7 @@
         focusItem(currentIndex + 1);
       } else if (key === "k") {
         e.preventDefault();
-        focusItem(currentIndex <= 0 ? 0 : currentIndex - 1);
+        focusItem(currentIndex <= 0 ? -1 : currentIndex - 1);
       } else if (sectionMap[e.key]) {
         e.preventDefault();
         jumpToSection(sectionMap[e.key]);
