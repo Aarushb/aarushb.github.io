@@ -181,10 +181,15 @@
 
 <section id="skills" aria-labelledby="heading-skills" class="mb-5">
   <h2 id="heading-skills">Technical Stack &amp; Honors</h2>
-  <ul>
-    <li><strong>Languages:</strong> Rust, Python, TypeScript/JavaScript, C++, C, SQL, Bash, LaTeX</li>
-    <li><strong>Systems &amp; Accessibility:</strong> Win32 UI Automation (<code>IUIAutomation</code>), wxDragon / wxPython, Prism, Linux D-Bus, WCAG 2.1/2.2 AA, WAI-ARIA, NVDA SDK</li>
-    <li><strong>Backend, AI &amp; Cloud:</strong> FastAPI, Next.js, Astro, Node.js, PyTorch, Hugging Face Transformers (BERT), Gemini Live API, Web Audio API (HRTF &amp; Raw PCM), Cloudflare Workers &amp; D1, AWS (Bedrock, ECS Fargate, Transcribe, Polly, RDS), Docker, PostgreSQL</li>
-    <li><strong>Honors:</strong> 1st Place EU Launchpad (<em>Northstar</em>), 1st Place AWS DevCon (<em>GuardReady</em>), 2nd Place natIgnite (<em>Rhythm &amp; Hue</em>), 3rd Place UAlberta CHADS CTF, $7,500 URI Research Grant, UAlberta International Entrance Scholarship, NTSE Scholar (Top 0.1% in India)</li>
-  </ul>
+  <article class="card mb-3 portfolio-item" data-section="Skills" tabindex="-1">
+    <div class="card-body">
+      <h3>Core Competencies &amp; Recognition</h3>
+      <ul>
+        <li><strong>Languages:</strong> Rust, Python, TypeScript/JavaScript, C++, C, SQL, Bash, LaTeX</li>
+        <li><strong>Systems &amp; Accessibility:</strong> Win32 UI Automation (<code>IUIAutomation</code>), wxDragon / wxPython, Prism, Linux D-Bus, WCAG 2.1/2.2 AA, WAI-ARIA, NVDA SDK</li>
+        <li><strong>Backend, AI &amp; Cloud:</strong> FastAPI, Next.js, Astro, Node.js, PyTorch, Hugging Face Transformers (BERT), Gemini Live API, Web Audio API (HRTF &amp; Raw PCM), Cloudflare Workers &amp; D1, AWS (Bedrock, ECS Fargate, Transcribe, Polly, RDS), Docker, PostgreSQL</li>
+        <li><strong>Honors:</strong> 1st Place EU Launchpad (<em>Northstar</em>), 1st Place AWS DevCon (<em>GuardReady</em>), 2nd Place natIgnite (<em>Rhythm &amp; Hue</em>), 3rd Place UAlberta CHADS CTF, $7,500 URI Research Grant, UAlberta International Entrance Scholarship, NTSE Scholar (Top 0.1% in India)</li>
+      </ul>
+    </div>
+  </article>
 </section>
