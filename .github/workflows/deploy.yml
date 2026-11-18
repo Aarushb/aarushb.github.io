@@ -27,16 +27,16 @@ jobs:
       - name: Set up uv
         uses: astral-sh/setup-uv@v5
         with:
+          python-version: "3.12"
           enable-cache: true
 
-      - name: Set up Python
-        run: uv python install 3.12
-
       - name: Install dependencies
-        run: uv pip install --system "Nikola[extras]>=8.3.1"
+        run: |
+          uv venv
+          uv pip install "Nikola[extras]>=8.3.1"
 
       - name: Build Nikola site
-        run: nikola build
+        run: uv run nikola build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
