@@ -31,9 +31,7 @@ jobs:
           enable-cache: true
 
       - name: Install dependencies
-        run: |
-          uv venv
-          uv pip install "Nikola[extras]>=8.3.1"
+        run: uv pip install "Nikola[extras]>=8.3.1"
 
       - name: Build Nikola site
         run: uv run nikola build
