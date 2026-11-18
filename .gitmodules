@@ -1,0 +1,3 @@
+[submodule "themes/lazykola-a11y"]
+	path = themes/lazykola-a11y
+	url = https://github.com/Aarushb/lazykola-a11y.git
