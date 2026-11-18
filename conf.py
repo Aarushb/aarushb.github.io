@@ -1253,9 +1253,13 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.c
 # (translatable)
 EXTRA_HEAD_DATA = """
 <style>
-.portfolio-item:focus {
+.portfolio-item:focus,
+.portfolio-item:focus-within {
   outline: 2px solid var(--site-accent);
   outline-offset: 3px;
+}
+.portfolio-item h3:focus {
+  outline: none;
 }
 dialog#shortcuts-dialog {
   border-radius: var(--site-radius);

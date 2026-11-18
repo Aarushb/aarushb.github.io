@@ -115,6 +115,16 @@
     const openHelpBtn = document.getElementById("shortcuts-open-btn");
     const closeHelpBtn = document.getElementById("shortcuts-close-btn");
 
+    // Link each card to its heading for screen reader name resolution
+    items.forEach((item, idx) => {
+      const title = item.querySelector("h3");
+      if (title) {
+        const headingId = title.id || `portfolio-item-heading-${idx}`;
+        title.id = headingId;
+        item.setAttribute("aria-labelledby", headingId);
+      }
+    });
+
     const sectionMap = {
       "1": "experience",
       "2": "projects",
@@ -160,15 +170,23 @@
       const titleText = titleEl ? titleEl.textContent.trim() : "Item";
 
       currentIndex = nextIndex;
-      target.focus({ preventScroll: true });
+
+      // Focus the heading so screen readers (NVDA/JAWS/VoiceOver) announce the heading
+      // and position the virtual reading cursor at the item's content, rather than
+      // announcing generic "document" / "article" on the container.
+      if (titleEl) {
+        titleEl.setAttribute("tabindex", "-1");
+        titleEl.focus({ preventScroll: true });
+      } else {
+        target.focus({ preventScroll: true });
+      }
       target.scrollIntoView({ behavior: "smooth", block: "center" });
 
       if (prevSection !== nextSection) {
         synth.cueSectionBoundary(currentIndex, items.length);
-        announce(`${nextSection}: ${titleText}`);
+        announce(`${nextSection}`);
       } else {
         synth.cueItem(currentIndex, items.length);
-        announce(titleText);
       }
     }
 
