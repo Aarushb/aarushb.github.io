@@ -1258,7 +1258,7 @@ EXTRA_HEAD_DATA = """
   outline: 2px solid var(--site-accent);
   outline-offset: 3px;
 }
-.portfolio-item h3:focus {
+.portfolio-item :is(h2, h3, h4, h5, h6):focus {
   outline: none;
 }
 dialog#shortcuts-dialog:not([open]) {

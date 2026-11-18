@@ -117,7 +117,7 @@
 
     // Link each card to its heading for screen reader name resolution
     items.forEach((item, idx) => {
-      const title = item.querySelector("h3");
+      const title = item.querySelector("h2, h3, h4, h5, h6");
       if (title) {
         const headingId = title.id || `portfolio-item-heading-${idx}`;
         title.id = headingId;
@@ -166,7 +166,7 @@
       const prevSection = currentIndex >= 0 ? items[currentIndex].dataset.section : null;
       const target = items[nextIndex];
       const nextSection = target.dataset.section || "";
-      const titleEl = target.querySelector("h3");
+      const titleEl = target.querySelector("h2, h3, h4, h5, h6");
       const titleText = titleEl ? titleEl.textContent.trim() : "Item";
 
       currentIndex = nextIndex;
@@ -194,7 +194,7 @@
       const sectionEl = document.getElementById(sectionId);
       if (!sectionEl) return;
 
-      const heading = sectionEl.querySelector("h2");
+      const heading = sectionEl.querySelector("h2, h3, h4, h5, h6");
       const firstItemIndex = items.findIndex((el) => el.closest(`#${sectionId}`));
 
       if (firstItemIndex !== -1) {
