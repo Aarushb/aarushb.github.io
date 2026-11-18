@@ -5,7 +5,7 @@
 .. type: text
 -->
 
-<section aria-labelledby="hero-heading" class="mb-5">
+<section class="mb-5">
   <h1 id="hero-heading">Systems, AI Agent, &amp; Accessibility Engineer</h1>
   <p class="lead">
     Computing Science student at the University of Alberta (4.0 GPA). I build low-level developer tools in Rust, real-time audio and AI systems, and software where non-visual accessibility is part of the core architecture rather than an afterthought.
@@ -26,7 +26,7 @@
   </div>
 </section>
 
-<section id="experience" aria-labelledby="heading-experience" class="mb-5">
+<section id="experience" class="mb-5">
   <h2 id="heading-experience">Experience &amp; Funded R&amp;D</h2>
 
   <div class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
@@ -81,7 +81,7 @@
   </div>
 </section>
 
-<section id="projects" aria-labelledby="heading-projects" class="mb-5">
+<section id="projects" class="mb-5">
   <h2 id="heading-projects">Selected Systems &amp; Engineering</h2>
 
   <div class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
@@ -147,7 +147,7 @@
   </div>
 </section>
 
-<section id="open-source" aria-labelledby="heading-oss" class="mb-5">
+<section id="open-source" class="mb-5">
   <h2 id="heading-oss">Upstream Open-Source Contributions</h2>
 
   <div class="card mb-3 portfolio-item" data-section="Open Source" tabindex="-1">
@@ -177,7 +177,7 @@
   </div>
 </section>
 
-<section id="skills" aria-labelledby="heading-skills" class="mb-5">
+<section id="skills" class="mb-5">
   <h2 id="heading-skills">Technical Stack &amp; Honors</h2>
   <div class="card mb-3 portfolio-item" data-section="Skills" tabindex="-1">
     <div class="card-body">
