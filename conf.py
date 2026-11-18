@@ -1253,6 +1253,10 @@ COPY_SOURCES = False
 # (translatable)
 EXTRA_HEAD_DATA = """
 <style>
+.hero-link-icon {
+  vertical-align: -0.15em;
+  margin-right: 0.25rem;
+}
 .portfolio-item:focus,
 .portfolio-item:focus-within {
   outline: 2px solid var(--site-accent);
