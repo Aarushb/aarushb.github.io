@@ -107,9 +107,9 @@
 
   // --- 2. Keyboard Shortcut Router & ARIA Live Announcer ---
   document.addEventListener("DOMContentLoaded", () => {
-    // When a page hides its title (.. hidetitle: True), <header> has no <h2>,
-    // so content sections should start at <h2> directly under the navbar <h1>
-    // (and card items at <h3>) rather than being shifted to <h3>/<h4>.
+    // When a page hides its title (.. hidetitle: True) and navbar brand is not an <h1>,
+    // the shallowest content heading (#hero-heading) should stay at <h1>,
+    // with sections at <h2> and card items at <h3>.
     document.querySelectorAll(".entry-content").forEach((container) => {
       const article = container.closest("article");
       const hasHeaderTitle = article && article.querySelector("header h1, header h2, header .entry-title");
@@ -119,7 +119,7 @@
       if (headings.length === 0) return;
 
       const minLevel = Math.min(...headings.map((h) => parseInt(h.tagName.charAt(1), 10)));
-      const offset = 2 - minLevel;
+      const offset = 1 - minLevel;
       if (offset === 0) return;
 
       headings.forEach((h) => {

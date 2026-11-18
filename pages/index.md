@@ -8,7 +8,7 @@
 <div id="a11y-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
 <section aria-labelledby="hero-heading" class="mb-5">
-  <h2 id="hero-heading">Systems, AI Agent, &amp; Accessibility Engineer</h2>
+  <h1 id="hero-heading">Systems, AI Agent, &amp; Accessibility Engineer</h1>
   <p class="lead">
     Computing Science student at the University of Alberta (4.0 GPA). I build low-level developer tools in Rust, real-time audio and AI systems, and software where non-visual accessibility is part of the core architecture rather than an afterthought.
   </p>
