@@ -38,7 +38,7 @@
         panner.distanceModel = "inverse";
         panner.refDistance = 1;
         panner.maxDistance = 10;
-        panner.rolloffFactor = 1;
+        panner.rolloffFactor = 0.35;
 
         const px = Math.max(-1.2, Math.min(1.2, x));
         const py = Math.max(-0.8, Math.min(0.8, y));
@@ -59,7 +59,7 @@
 
     playTone(
       freq,
-      { duration = 0.11, x = 0, y = 0, type = "triangle", cutoff = 1500, gain = 0.075, delay = 0 } = {},
+      { duration = 0.11, x = 0, y = 0, type = "triangle", cutoff = 1500, gain = 0.16, delay = 0 } = {},
       force = false
     ) {
       if ((!this.enabled && !force) || !this.ctx) return;
@@ -132,12 +132,12 @@
       const tag = el.tagName ? el.tagName.toLowerCase() : "";
 
       if (tag === "button" || el.getAttribute("role") === "button") {
-        this.playTone(freq, { duration: 0.1, x, y, type: "sine", cutoff: 1400, gain: 0.08 });
-        this.playTone(freq * 1.5, { duration: 0.07, x, y, type: "triangle", cutoff: 1800, gain: 0.035, delay: 0.015 });
+        this.playTone(freq, { duration: 0.1, x, y, type: "sine", cutoff: 1400, gain: 0.17 });
+        this.playTone(freq * 1.5, { duration: 0.07, x, y, type: "triangle", cutoff: 1800, gain: 0.075, delay: 0.015 });
       } else if (tag === "a") {
-        this.playTone(freq, { duration: 0.11, x, y, type: "triangle", cutoff: 1450, gain: 0.075 });
+        this.playTone(freq, { duration: 0.11, x, y, type: "triangle", cutoff: 1450, gain: 0.16 });
       } else {
-        this.playTone(freq, { duration: 0.1, x, y, type: "sine", cutoff: 1300, gain: 0.07 });
+        this.playTone(freq, { duration: 0.1, x, y, type: "sine", cutoff: 1300, gain: 0.15 });
       }
     }
 
@@ -147,19 +147,19 @@
       this.initContext();
 
       const { x, y } = this.getSpatialCoords(el);
-      this.playTone(293.66, { duration: 0.1, x, y, type: "sine", cutoff: 1500, gain: 0.07, delay: 0 });
-      this.playTone(440.0, { duration: 0.15, x, y, type: "triangle", cutoff: 1650, gain: 0.08, delay: 0.055 });
+      this.playTone(293.66, { duration: 0.1, x, y, type: "sine", cutoff: 1500, gain: 0.15, delay: 0 });
+      this.playTone(440.0, { duration: 0.15, x, y, type: "triangle", cutoff: 1650, gain: 0.17, delay: 0.055 });
     }
 
     playToggleOn() {
-      this.playTone(261.63, { duration: 0.09, x: -0.35, y: 0, gain: 0.07, delay: 0 }, true);
-      this.playTone(329.63, { duration: 0.09, x: 0.0, y: 0.1, gain: 0.07, delay: 0.05 }, true);
-      this.playTone(392.0, { duration: 0.14, x: 0.35, y: 0.2, gain: 0.08, delay: 0.1 }, true);
+      this.playTone(261.63, { duration: 0.09, x: -0.35, y: 0, gain: 0.15, delay: 0 }, true);
+      this.playTone(329.63, { duration: 0.09, x: 0.0, y: 0.1, gain: 0.15, delay: 0.05 }, true);
+      this.playTone(392.0, { duration: 0.14, x: 0.35, y: 0.2, gain: 0.17, delay: 0.1 }, true);
     }
 
     playToggleOff() {
-      this.playTone(392.0, { duration: 0.09, x: 0.35, y: 0.2, gain: 0.06, delay: 0 }, true);
-      this.playTone(261.63, { duration: 0.13, x: -0.35, y: 0, gain: 0.06, delay: 0.05 }, true);
+      this.playTone(392.0, { duration: 0.09, x: 0.35, y: 0.2, gain: 0.14, delay: 0 }, true);
+      this.playTone(261.63, { duration: 0.13, x: -0.35, y: 0, gain: 0.14, delay: 0.05 }, true);
     }
   }
 
