@@ -1,13 +1,13 @@
 (() => {
   "use strict";
 
-  // --- 1. Procedural Web Audio API Synthesizer (Zero External Assets) ---
+  // --- 1. Procedural 2D HRTF Web Audio Synthesizer (Zero External Assets) ---
   class EarconSynth {
     constructor() {
       this.ctx = null;
       this.enabled = false;
-      // C Major Pentatonic frequencies (Hz)
-      this.scale = [261.63, 293.66, 329.63, 392.0, 440.0, 523.25];
+      // C Major Pentatonic from high (top of page) to low (bottom of page)
+      this.scaleDesc = [523.25, 440.0, 392.0, 329.63, 293.66, 261.63];
     }
 
     initContext() {
@@ -31,13 +31,43 @@
       return this.enabled;
     }
 
-    playTone(freq, { duration = 0.12, pan = 0, type = "triangle", cutoff = 1400, gain = 0.08, delay = 0 } = {}, force = false) {
+    createSpatialNode(x, y, now) {
+      if (typeof this.ctx.createPanner === "function") {
+        const panner = this.ctx.createPanner();
+        panner.panningModel = "HRTF";
+        panner.distanceModel = "inverse";
+        panner.refDistance = 1;
+        panner.maxDistance = 10;
+        panner.rolloffFactor = 1;
+
+        const px = Math.max(-1.2, Math.min(1.2, x));
+        const py = Math.max(-0.8, Math.min(0.8, y));
+        if (panner.positionX) {
+          panner.positionX.setValueAtTime(px, now);
+          panner.positionY.setValueAtTime(py, now);
+          panner.positionZ.setValueAtTime(-1.0, now);
+        } else {
+          panner.setPosition(px, py, -1.0);
+        }
+        return panner;
+      }
+
+      const stereo = this.ctx.createStereoPanner();
+      stereo.pan.setValueAtTime(Math.max(-0.75, Math.min(0.75, x * 0.65)), now);
+      return stereo;
+    }
+
+    playTone(
+      freq,
+      { duration = 0.11, x = 0, y = 0, type = "triangle", cutoff = 1500, gain = 0.075, delay = 0 } = {},
+      force = false
+    ) {
       if ((!this.enabled && !force) || !this.ctx) return;
 
       const now = this.ctx.currentTime + delay;
       const osc = this.ctx.createOscillator();
       const filter = this.ctx.createBiquadFilter();
-      const panner = this.ctx.createStereoPanner();
+      const spatial = this.createSpatialNode(x, y, now);
       const amp = this.ctx.createGain();
 
       osc.type = type;
@@ -46,69 +76,96 @@
       filter.type = "lowpass";
       filter.frequency.setValueAtTime(cutoff, now);
 
-      panner.pan.setValueAtTime(Math.max(-1, Math.min(1, pan)), now);
-
       // Smooth 10ms attack and exponential decay to eliminate audio clicks
       amp.gain.setValueAtTime(0.0001, now);
       amp.gain.linearRampToValueAtTime(gain, now + 0.01);
       amp.gain.exponentialRampToValueAtTime(0.0001, now + duration);
 
       osc.connect(filter);
-      filter.connect(panner);
-      panner.connect(amp);
+      filter.connect(spatial);
+      spatial.connect(amp);
       amp.connect(this.ctx.destination);
 
       osc.start(now);
       osc.stop(now + duration + 0.02);
     }
 
-    // Standard item-to-item navigation cue
-    cueItem(index, total) {
-      const ratio = total > 1 ? index / (total - 1) : 0.5;
-      const pan = -0.45 + ratio * 0.9; // Sweeps -0.45 (left) -> +0.45 (right)
-      const freq = this.scale[index % this.scale.length];
-      this.playTone(freq, { duration: 0.11, pan, type: "triangle", cutoff: 1350, gain: 0.075 });
+    getSpatialCoords(el) {
+      if (!el || typeof el.getBoundingClientRect !== "function") {
+        return { x: 0, y: 0, docRatio: 0.5 };
+      }
+
+      const rect = el.getBoundingClientRect();
+      const vw = Math.max(1, window.innerWidth || document.documentElement.clientWidth);
+      const vh = Math.max(1, window.innerHeight || document.documentElement.clientHeight);
+      const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      const docHeight = Math.max(1, document.documentElement.scrollHeight);
+
+      // Horizontal viewport position: 0 (left edge) -> 1 (right edge)
+      const centerX = rect.left + rect.width / 2;
+      const xNorm = Math.max(0, Math.min(1, centerX / vw));
+      const x = (xNorm - 0.5) * 2.2; // Maps to [-1.1, +1.1] for clear left/right HRTF separation
+
+      // Vertical viewport position: +0.7 (top) -> -0.7 (bottom)
+      const centerY = rect.top + rect.height / 2;
+      const yNorm = Math.max(0, Math.min(1, centerY / vh));
+      const y = (0.5 - yNorm) * 1.4;
+
+      // Full-document vertical progress: 0 (top of page) -> 1 (bottom of page)
+      const docRatio = Math.max(0, Math.min(1, (rect.top + scrollY) / docHeight));
+
+      return { x, y, docRatio };
     }
 
-    // Two-note fifth interval when crossing into a new major section
-    cueSectionBoundary(index, total) {
-      const ratio = total > 1 ? index / (total - 1) : 0.5;
-      const pan = -0.45 + ratio * 0.9;
-      this.playTone(293.66, { duration: 0.1, pan, type: "sine", cutoff: 1500, gain: 0.07, delay: 0 });
-      this.playTone(440.0, { duration: 0.15, pan, type: "triangle", cutoff: 1600, gain: 0.08, delay: 0.055 });
+    // 2D spatial earcon when naturally focusing interactive elements
+    cueFocus(el) {
+      if (!this.enabled) return;
+      this.initContext();
+
+      const { x, y, docRatio } = this.getSpatialCoords(el);
+      const scaleIndex = Math.min(
+        this.scaleDesc.length - 1,
+        Math.floor(docRatio * this.scaleDesc.length)
+      );
+      const freq = this.scaleDesc[scaleIndex];
+      const tag = el.tagName ? el.tagName.toLowerCase() : "";
+
+      if (tag === "button" || el.getAttribute("role") === "button") {
+        this.playTone(freq, { duration: 0.1, x, y, type: "sine", cutoff: 1400, gain: 0.08 });
+        this.playTone(freq * 1.5, { duration: 0.07, x, y, type: "triangle", cutoff: 1800, gain: 0.035, delay: 0.015 });
+      } else if (tag === "a") {
+        this.playTone(freq, { duration: 0.11, x, y, type: "triangle", cutoff: 1450, gain: 0.075 });
+      } else {
+        this.playTone(freq, { duration: 0.1, x, y, type: "sine", cutoff: 1300, gain: 0.07 });
+      }
     }
 
-    // Muted low octave thud at top/bottom boundary
-    cueBoundaryThud(isBottom) {
-      const pan = isBottom ? 0.45 : -0.45;
-      this.playTone(130.81, { duration: 0.14, pan, type: "sine", cutoff: 420, gain: 0.1 });
+    // Two-note fifth interval when jumping to a section anchor (#experience, etc.)
+    cueSectionJump(el) {
+      if (!this.enabled) return;
+      this.initContext();
+
+      const { x, y } = this.getSpatialCoords(el);
+      this.playTone(293.66, { duration: 0.1, x, y, type: "sine", cutoff: 1500, gain: 0.07, delay: 0 });
+      this.playTone(440.0, { duration: 0.15, x, y, type: "triangle", cutoff: 1650, gain: 0.08, delay: 0.055 });
     }
 
     playToggleOn() {
-      this.playTone(261.63, { duration: 0.09, pan: -0.2, gain: 0.07, delay: 0 }, true);
-      this.playTone(329.63, { duration: 0.09, pan: 0.0, gain: 0.07, delay: 0.05 }, true);
-      this.playTone(392.0, { duration: 0.14, pan: 0.2, gain: 0.08, delay: 0.1 }, true);
+      this.playTone(261.63, { duration: 0.09, x: -0.35, y: 0, gain: 0.07, delay: 0 }, true);
+      this.playTone(329.63, { duration: 0.09, x: 0.0, y: 0.1, gain: 0.07, delay: 0.05 }, true);
+      this.playTone(392.0, { duration: 0.14, x: 0.35, y: 0.2, gain: 0.08, delay: 0.1 }, true);
     }
 
     playToggleOff() {
-      this.playTone(392.0, { duration: 0.09, pan: 0.2, gain: 0.06, delay: 0 }, true);
-      this.playTone(261.63, { duration: 0.13, pan: -0.2, gain: 0.06, delay: 0.05 }, true);
-    }
-
-    playModalCue(opening) {
-      if (opening) {
-        this.playTone(392.0, { duration: 0.08, gain: 0.06, delay: 0 });
-        this.playTone(523.25, { duration: 0.12, gain: 0.07, delay: 0.045 });
-      } else {
-        this.playTone(392.0, { duration: 0.09, gain: 0.05, delay: 0 });
-      }
+      this.playTone(392.0, { duration: 0.09, x: 0.35, y: 0.2, gain: 0.06, delay: 0 }, true);
+      this.playTone(261.63, { duration: 0.13, x: -0.35, y: 0, gain: 0.06, delay: 0.05 }, true);
     }
   }
 
-  // --- 2. Keyboard Shortcut Router & ARIA Live Announcer ---
+  // --- 2. Heading Normalization, Native Accesskeys & Event-Driven Audio ---
   document.addEventListener("DOMContentLoaded", () => {
     // When a page hides its title (.. hidetitle: True) and navbar brand is not an <h1>,
-    // the shallowest content heading (#hero-heading) should stay at <h1>,
+    // keep the shallowest content heading (#hero-heading) at <h1>,
     // with sections at <h2> and card items at <h3>.
     document.querySelectorAll(".entry-content").forEach((container) => {
       const article = container.closest("article");
@@ -138,24 +195,23 @@
       });
     });
 
+    // Attach native HTML accesskey bindings to Nikola's generated navbar links
+    const navAccessKeys = {
+      "#experience": "w",
+      "#projects": "p",
+      "#open-source": "o",
+      "#skills": "s"
+    };
+    Object.entries(navAccessKeys).forEach(([href, key]) => {
+      const link = document.querySelector(`nav a[href="${href}"]`);
+      if (link) link.setAttribute("accesskey", key);
+    });
+
     const synth = new EarconSynth();
-    const items = Array.from(document.querySelectorAll(".portfolio-item"));
     const announcer = document.getElementById("a11y-announcer");
     const toggleBtn = document.getElementById("audio-toggle-btn");
-    const dialog = document.getElementById("shortcuts-dialog");
-    const openHelpBtn = document.getElementById("shortcuts-open-btn");
-    const closeHelpBtn = document.getElementById("shortcuts-close-btn");
-
-    const sectionMap = {
-      "1": "experience",
-      "2": "projects",
-      "3": "open-source",
-      "4": "skills"
-    };
-
-    let currentIndex = -1;
-    let lastFocusedBeforeModal = null;
     let announceClearTimer = null;
+    let suppressNextToggleFocusCue = false;
 
     function announce(text) {
       if (!announcer) return;
@@ -175,191 +231,37 @@
       toggleBtn.textContent = isOn ? "Audio Cues: On" : "Audio Cues: Off";
     }
 
-    function focusItem(nextIndex) {
-      if (items.length === 0) return;
-
-      if (nextIndex < 0) {
-        synth.cueBoundaryThud(false);
-        announce("Top of portfolio items");
-        return;
-      }
-      if (nextIndex >= items.length) {
-        synth.cueBoundaryThud(true);
-        announce("End of portfolio items");
-        return;
-      }
-
-      const prevSection = currentIndex >= 0 ? items[currentIndex].dataset.section : null;
-      const target = items[nextIndex];
-      const nextSection = target.dataset.section || "";
-      const titleEl = target.querySelector("h2, h3, h4, h5, h6");
-      const titleText = titleEl ? titleEl.textContent.trim() : "Item";
-
-      currentIndex = nextIndex;
-
-      // Focus the heading so screen readers (NVDA/JAWS/VoiceOver) announce the heading
-      // and position the virtual reading cursor at the item's content, rather than
-      // announcing generic "document" / "article" on the container.
-      if (titleEl) {
-        titleEl.setAttribute("tabindex", "-1");
-        titleEl.focus({ preventScroll: true });
-      } else {
-        target.focus({ preventScroll: true });
-      }
-      target.scrollIntoView({ behavior: "smooth", block: "center" });
-
-      if (prevSection !== nextSection) {
-        synth.cueSectionBoundary(currentIndex, items.length);
-        announce(`${nextSection}`);
-      } else {
-        synth.cueItem(currentIndex, items.length);
-      }
-    }
-
-    function jumpToSection(sectionId) {
-      const sectionEl = document.getElementById(sectionId);
-      if (!sectionEl) return;
-
-      const heading = sectionEl.querySelector("h2, h3, h4, h5, h6");
-      const firstItemIndex = items.findIndex((el) => el.closest(`#${sectionId}`));
-
-      if (firstItemIndex !== -1) {
-        currentIndex = firstItemIndex;
-      }
-
-      if (heading) {
-        heading.setAttribute("tabindex", "-1");
-        heading.focus({ preventScroll: true });
-      }
-      sectionEl.scrollIntoView({ behavior: "smooth", block: "start" });
-
-      const idxForPan = firstItemIndex !== -1 ? firstItemIndex : 0;
-      synth.cueSectionBoundary(idxForPan, items.length || 4);
-      announce(`Section: ${heading ? heading.textContent.trim() : sectionId}`);
-    }
-
-    function openHelpModal() {
-      if (!dialog) return;
-      lastFocusedBeforeModal = document.activeElement;
-      if (typeof dialog.showModal === "function") {
-        try {
-          dialog.showModal();
-        } catch (e) {
-          dialog.setAttribute("open", "");
-        }
-      } else {
-        dialog.setAttribute("open", "");
-      }
-      synth.playModalCue(true);
-      const closeBtn = document.getElementById("shortcuts-close-btn");
-      if (closeBtn) closeBtn.focus();
-    }
-
-    function closeHelpModal() {
-      if (!dialog) return;
-      try {
-        if (dialog.open) {
-          dialog.close();
-        }
-      } catch (e) {}
-      dialog.removeAttribute("open");
-      synth.playModalCue(false);
-      if (lastFocusedBeforeModal && typeof lastFocusedBeforeModal.focus === "function") {
-        lastFocusedBeforeModal.focus();
-      }
-    }
-
     if (toggleBtn) {
       toggleBtn.addEventListener("click", () => {
+        suppressNextToggleFocusCue = true;
         const state = synth.toggle();
         updateToggleUI(state);
         announce(state ? "Spatial audio cues enabled" : "Audio cues muted");
+        setTimeout(() => {
+          suppressNextToggleFocusCue = false;
+        }, 100);
       });
     }
 
-    if (openHelpBtn) openHelpBtn.addEventListener("click", openHelpModal);
-    if (closeHelpBtn) {
-      closeHelpBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        closeHelpModal();
-      });
-    }
+    // Play 2D spatial earcon when naturally tabbing or jumping via accesskey
+    document.addEventListener("focusin", (e) => {
+      const target = e.target;
+      if (!target || typeof target.matches !== "function") return;
+      if (!target.matches('a, button, summary, [tabindex="0"]')) return;
+      if (target === toggleBtn && suppressNextToggleFocusCue) return;
 
-    if (dialog) {
-      dialog.addEventListener("close", () => {
-        if (lastFocusedBeforeModal && typeof lastFocusedBeforeModal.focus === "function") {
-          lastFocusedBeforeModal.focus();
-        }
-      });
-      dialog.addEventListener("click", (e) => {
-        const rect = dialog.getBoundingClientRect();
-        const isInDialog = (
-          rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
-          rect.left <= e.clientX && e.clientX <= rect.left + rect.width
-        );
-        if (!isInDialog) {
-          closeHelpModal();
-        }
-      });
-    }
+      synth.cueFocus(target);
+    });
 
-    document.addEventListener("keydown", (e) => {
-      if (e.ctrlKey || e.metaKey || e.altKey) return;
+    // Play section-jump fifth interval when navigating to an anchor (#experience, etc.)
+    window.addEventListener("hashchange", () => {
+      const id = window.location.hash ? window.location.hash.slice(1) : "";
+      if (!id) return;
+      const sectionEl = document.getElementById(id);
+      if (!sectionEl) return;
 
-      const tag = e.target && e.target.tagName ? e.target.tagName.toLowerCase() : "";
-      if (tag === "input" || tag === "textarea" || tag === "select" || e.target.isContentEditable) {
-        return;
-      }
-
-      if (dialog && dialog.open) {
-        if (e.key === "?" || e.key === "Escape") {
-          e.preventDefault();
-          closeHelpModal();
-        }
-        return;
-      }
-
-      const key = e.key.toLowerCase();
-
-      if (key === "j") {
-        e.preventDefault();
-        focusItem(currentIndex + 1);
-      } else if (key === "k") {
-        e.preventDefault();
-        focusItem(currentIndex <= 0 ? -1 : currentIndex - 1);
-      } else if (sectionMap[e.key]) {
-        e.preventDefault();
-        jumpToSection(sectionMap[e.key]);
-      } else if (key === "m") {
-        e.preventDefault();
-        const state = synth.toggle();
-        updateToggleUI(state);
-        announce(state ? "Spatial audio cues enabled" : "Audio cues muted");
-      } else if (key === "g") {
-        const gh = document.getElementById("link-github");
-        if (gh) {
-          e.preventDefault();
-          gh.focus();
-          synth.playTone(440, { duration: 0.08, gain: 0.06 });
-        }
-      } else if (key === "l") {
-        const li = document.getElementById("link-linkedin");
-        if (li) {
-          e.preventDefault();
-          li.focus();
-          synth.playTone(440, { duration: 0.08, gain: 0.06 });
-        }
-      } else if (key === "r") {
-        const res = document.getElementById("link-resume");
-        if (res) {
-          e.preventDefault();
-          res.focus();
-          synth.playTone(440, { duration: 0.08, gain: 0.06 });
-        }
-      } else if (e.key === "?") {
-        e.preventDefault();
-        openHelpModal();
-      }
+      const heading = sectionEl.querySelector("h2, h3, h4") || sectionEl;
+      synth.cueSectionJump(heading);
     });
   });
 })();
