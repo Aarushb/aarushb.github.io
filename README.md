@@ -13,18 +13,19 @@ Live site: [https://aarushb.github.io/](https://aarushb.github.io/)
   - Accessible violet accent colors (`#5540d6` light / `#b4a5fb` dark) passing WCAG AA contrast.
   - Automatic OS dark mode support (`prefers-color-scheme`).
   - Semantic heading normalization and landmark navigation.
-- **Procedural Web Audio Earcons**:
-  - Zero external MP3/WAV assets; 100% synthesized in-browser via the Web Audio API.
-  - Stereo-panned navigation cues sweeping across stereo channels as you traverse portfolio cards.
-  - Musical fifth intervals on section boundaries, boundary thuds, and modal open/close cues.
-  - Audio cues toggle button with state persistence in UI.
-- **Vim-Style & Single-Key Keyboard Navigation**:
-  - `J` / `K` — Move forward / backward across portfolio cards with synchronized focus, smooth scrolling, and spatial earcons.
-  - `1`, `2`, `3`, `4` — Direct jumps to Experience, Projects, Open Source, and Skills sections.
-  - `M` — Toggle spatial audio cues on / off.
-  - `G` / `L` / `R` — Direct focus to GitHub, LinkedIn, or Resume links.
-  - `?` or `Esc` — Open and close the keyboard shortcuts help dialog.
-  - Screen reader feedback announced live via `#a11y-announcer`.
+- **Procedural 2D HRTF Spatial Audio Earcons**:
+  - Zero external MP3/WAV assets; 100% synthesized in-browser via the Web Audio API (`PannerNode` with `HRTF`, falling back to `StereoPannerNode`).
+  - Maps every focused element's 2D viewport/page coordinates (`focusin`) to horizontal left/right space, vertical elevation, and C-major pentatonic pitch (high at the top of the page, low at the bottom) — giving screen-reader users a mental map of the visual layout as they `Tab` through the page.
+  - Distinct timbres for links vs. buttons, plus a two-note fifth interval on section anchor jumps (`hashchange`).
+  - `Audio Cues: Off/On` toggle button (`accesskey="m"`) with polite live announcement.
+- **Native HTML `accesskey` Navigation**:
+  - Standard browser/screen-reader `accesskey` bindings without overriding Browse Mode:
+    - `w` — Experience & Funded R&D (`#experience`)
+    - `p` — Selected Systems & Engineering (`#projects`)
+    - `o` — Upstream Open-Source Contributions (`#open-source`)
+    - `s` — Technical Stack & Honors (`#skills`)
+    - `g` / `l` / `r` — GitHub, LinkedIn, or Resume (PDF)
+    - `m` — Toggle spatial audio cues On / Off
 - **Package Management**: Scoped locally with [Astral `uv`](https://docs.astral.sh/uv/) (zero global pollution).
 - **CI/CD**: Automated GitHub Actions pipeline (`.github/workflows/deploy.yml`) building the site with `uv` and deploying directly to GitHub Pages.
 
@@ -52,10 +53,10 @@ uv run nikola auto
 
 All portfolio content is maintained in `pages/index.md`.
 
-To add, edit, or remove an item, simply edit the corresponding section in `pages/index.md`. The procedural audio synthesizer and keyboard shortcut router dynamically index every `.portfolio-item` in the DOM on load:
+To add, edit, or remove an item, simply edit the corresponding section in `pages/index.md`:
 
 ```html
-<article class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
+<div class="card mb-3">
   <div class="card-body">
     <h3>Project Name</h3>
     <p class="text-muted">Tech Stack · Description</p>
@@ -66,7 +67,7 @@ To add, edit, or remove an item, simply edit the corresponding section in `pages
     </ul>
     <p><a href="https://github.com/...">Source Code & Architecture (GitHub)</a></p>
   </div>
-</article>
+</div>
 ```
 
 ---
