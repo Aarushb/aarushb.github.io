@@ -16,12 +16,9 @@
     <a id="link-resume" href="/assets/Aarush_Bhat_Resume.pdf"><svg class="hero-link-icon" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/></svg>Resume (PDF)</a> &middot;
     <a href="mailto:aarush.bhat04@gmail.com"><svg class="hero-link-icon" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.708 2.825L15 11.105V5.383zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383v5.722z"/></svg>aarush.bhat04@gmail.com</a>
   </p>
-  <div role="group" aria-label="Accessibility and keyboard controls" class="mt-3">
+  <div role="group" aria-label="Accessibility audio controls" class="mt-3">
     <button id="audio-toggle-btn" type="button" class="btn btn-sm btn-outline-primary" aria-pressed="false">
       Audio Cues: Off
-    </button>
-    <button id="shortcuts-open-btn" type="button" class="btn btn-sm btn-outline-secondary ml-2">
-      Keyboard Shortcuts (?)
     </button>
   </div>
 </section>
@@ -29,7 +26,7 @@
 <section id="experience" class="mb-5">
   <h2 id="heading-experience">Experience &amp; Funded R&amp;D</h2>
 
-  <div class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
+  <div class="card mb-3">
     <div class="card-body">
       <h3>Lead Software Engineering Intern &mdash; Kerr Interior Systems</h3>
       <p class="text-muted">Sep 2026 &ndash; Present &middot; Edmonton, AB</p>
@@ -43,7 +40,7 @@
     </div>
   </div>
 
-  <div class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
+  <div class="card mb-3">
     <div class="card-body">
       <h3>Principal Investigator &mdash; UAlberta Undergraduate Research Initiative (URI)</h3>
       <p class="text-muted">May 2026 &ndash; Present &middot; $7,500 Max-Tier Research Grant &middot; TUG 2026 Speaker</p>
@@ -57,7 +54,7 @@
     </div>
   </div>
 
-  <div class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
+  <div class="card mb-3">
     <div class="card-body">
       <h3>Co-Founder &amp; Lead Developer &mdash; VedAI</h3>
       <p class="text-muted">Oct 2023 &ndash; Sep 2026 &middot; Python, FastAPI, React, PostgreSQL</p>
@@ -70,7 +67,7 @@
     </div>
   </div>
 
-  <div class="card mb-3 portfolio-item" data-section="Experience" tabindex="-1">
+  <div class="card mb-3">
     <div class="card-body">
       <h3>Vice President of Technology &mdash; U of A AI Society (UAIS)</h3>
       <p class="text-muted">Oct 2023 &ndash; May 2026 &middot; Edmonton, AB</p>
@@ -84,7 +81,7 @@
 <section id="projects" class="mb-5">
   <h2 id="heading-projects">Selected Systems &amp; Engineering</h2>
 
-  <div class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
+  <div class="card mb-3">
     <div class="card-body">
       <h3>RISC-Free</h3>
       <p class="text-muted">Rust &middot; Win32 UI Automation &middot; wxDragon &middot; Prism</p>
@@ -99,7 +96,7 @@
     </div>
   </div>
 
-  <div class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
+  <div class="card mb-3">
     <div class="card-body">
       <h3>SpeakSync</h3>
       <p class="text-muted">Python 3.11+ &middot; Win32 / IUIAutomation &middot; Linux D-Bus &middot; macOS JXA &middot; Prism</p>
@@ -114,7 +111,7 @@
     </div>
   </div>
 
-  <div class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
+  <div class="card mb-3">
     <div class="card-body">
       <h3>Northstar</h3>
       <p class="text-muted">Python &middot; FastAPI &middot; WebSockets &middot; Gemini Live API &middot; Web Audio (HRTF) &middot; 1st Place, EU Launchpad</p>
@@ -132,7 +129,7 @@
     </div>
   </div>
 
-  <div class="card mb-3 portfolio-item" data-section="Projects" tabindex="-1">
+  <div class="card mb-3">
     <div class="card-body">
       <h3>UAIS Production Anti-Spam Bot</h3>
       <p class="text-muted">Python &middot; PyTorch &middot; Hugging Face BERT &middot; Asyncio</p>
@@ -150,7 +147,7 @@
 <section id="open-source" class="mb-5">
   <h2 id="heading-oss">Upstream Open-Source Contributions</h2>
 
-  <div class="card mb-3 portfolio-item" data-section="Open Source" tabindex="-1">
+  <div class="card mb-3">
     <div class="card-body">
       <h3>Ren'Py Visual Novel Engine (Official v8.6.0 Release)</h3>
       <p class="text-muted">Python &middot; Cython &middot; Prism Accessibility Bridge</p>
@@ -163,7 +160,7 @@
     </div>
   </div>
 
-  <div class="card mb-3 portfolio-item" data-section="Open Source" tabindex="-1">
+  <div class="card mb-3">
     <div class="card-body">
       <h3>Streamer LAN Audio Server (Merged PR #3 &mdash; +1,877 Lines)</h3>
       <p class="text-muted">Python &middot; FastAPI &middot; Server-Sent Events &middot; Web Audio API &middot; FFmpeg</p>
@@ -179,7 +176,7 @@
 
 <section id="skills" class="mb-5">
   <h2 id="heading-skills">Technical Stack &amp; Honors</h2>
-  <div class="card mb-3 portfolio-item" data-section="Skills" tabindex="-1">
+  <div class="card mb-3">
     <div class="card-body">
       <h3>Core Competencies &amp; Recognition</h3>
       <ul>

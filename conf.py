@@ -1257,57 +1257,11 @@ EXTRA_HEAD_DATA = """
   vertical-align: -0.15em;
   margin-right: 0.25rem;
 }
-.portfolio-item:focus,
-.portfolio-item:focus-within {
-  outline: 2px solid var(--site-accent);
-  outline-offset: 3px;
-}
-.portfolio-item :is(h2, h3, h4, h5, h6):focus {
-  outline: none;
-}
-dialog#shortcuts-dialog:not([open]) {
-  display: none !important;
-}
-dialog#shortcuts-dialog[open] {
-  display: block;
-}
-dialog#shortcuts-dialog {
-  border-radius: var(--site-radius);
-  border: 1px solid var(--site-accent);
-  padding: 1.5rem;
-  max-width: 520px;
-}
-dialog#shortcuts-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.6);
-}
-@media (prefers-color-scheme: dark) {
-  dialog#shortcuts-dialog {
-    background: #1e1e24;
-    color: #f8f9fa;
-  }
-}
 </style>
 """
 
 BODY_END = """
 <div id="a11y-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-<dialog id="shortcuts-dialog" aria-labelledby="shortcuts-title">
-  <h2 id="shortcuts-title">Keyboard Navigation Shortcuts</h2>
-  <p>Single-key shortcuts work anywhere outside text inputs:</p>
-  <ul>
-    <li><kbd>J</kbd> / <kbd>K</kbd> &mdash; Move to next / previous item across all sections</li>
-    <li><kbd>1</kbd> &mdash; Jump to Experience &amp; Funded R&amp;D</li>
-    <li><kbd>2</kbd> &mdash; Jump to Selected Systems &amp; Engineering</li>
-    <li><kbd>3</kbd> &mdash; Jump to Upstream Open-Source Contributions</li>
-    <li><kbd>4</kbd> &mdash; Jump to Technical Stack &amp; Honors</li>
-    <li><kbd>M</kbd> &mdash; Toggle synthesized spatial audio cues On / Off</li>
-    <li><kbd>G</kbd> / <kbd>L</kbd> / <kbd>R</kbd> &mdash; Focus GitHub, LinkedIn, or Resume link</li>
-    <li><kbd>?</kbd> or <kbd>Esc</kbd> &mdash; Close this shortcut dialog</li>
-  </ul>
-  <form method="dialog" class="mt-3 text-right">
-    <button id="shortcuts-close-btn" type="submit" class="btn btn-sm btn-primary">Close</button>
-  </form>
-</dialog>
 <script src="/assets/js/portfolio-a11y.js"></script>
 """
 
