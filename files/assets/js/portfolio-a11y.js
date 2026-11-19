@@ -95,7 +95,8 @@
         return { x: 0, y: 0, docRatio: 0.5 };
       }
 
-      const rect = el.getBoundingClientRect();
+      const rects = typeof el.getClientRects === "function" ? el.getClientRects() : null;
+      const rect = rects && rects.length > 0 ? rects[0] : el.getBoundingClientRect();
       const vw = Math.max(1, window.innerWidth || document.documentElement.clientWidth);
       const vh = Math.max(1, window.innerHeight || document.documentElement.clientHeight);
       const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
@@ -250,7 +251,9 @@
       if (!target.matches('a, button, summary, [tabindex="0"]')) return;
       if (target === toggleBtn && suppressNextToggleFocusCue) return;
 
-      synth.cueFocus(target);
+      requestAnimationFrame(() => {
+        synth.cueFocus(target);
+      });
     });
 
     // Play section-jump fifth interval when navigating to an anchor (#experience, etc.)
