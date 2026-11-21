@@ -21,9 +21,7 @@
   }
 </style>
 
-<div id="a11y-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-
-<section class="mb-5" aria-labelledby="hero-heading">
+<section class="mb-5">
   <h1 id="hero-heading">Software is built for <mark>people</mark>.</h1>
   <p class="lead">
     I'm a Computing Science student at the University of Alberta (4.0 GPA) working across low-level systems in Rust, real-time audio and AI pipelines, and assistive tooling. Most of what I build starts from a simple frustration: running into software that locks people out, and deciding to fix the architecture from the ground up rather than taping a workaround on top.
@@ -41,7 +39,7 @@
   </div>
 </section>
 
-<section id="experience" class="mb-5" aria-labelledby="heading-experience">
+<section id="experience" class="mb-5">
   <h2 id="heading-experience">Experience &amp; Funded R&amp;D</h2>
 
   <div class="card mb-3">
@@ -109,7 +107,7 @@
   </div>
 </section>
 
-<section id="projects" class="mb-5" aria-labelledby="heading-projects">
+<section id="projects" class="mb-5">
   <h2 id="heading-projects">Selected Systems &amp; Engineering</h2>
 
   <div class="card mb-3">
@@ -183,7 +181,7 @@
   </div>
 </section>
 
-<section id="open-source" class="mb-5" aria-labelledby="heading-oss">
+<section id="open-source" class="mb-5">
   <h2 id="heading-oss">Upstream Open-Source Contributions</h2>
 
   <div class="card mb-3">
@@ -222,7 +220,7 @@
   </div>
 </section>
 
-<section id="skills" class="mb-5" aria-labelledby="heading-skills">
+<section id="skills" class="mb-5">
   <h2 id="heading-skills">Technical Stack &amp; Honors</h2>
   <div class="card mb-3">
     <div class="card-body">
