@@ -5,22 +5,6 @@
 .. type: text
 -->
 
-<style>
-  mark {
-    background-color: rgba(85, 64, 214, 0.14);
-    color: inherit;
-    padding: 0.08em 0.35em;
-    border-radius: 0.25rem;
-    border-bottom: 2px solid #5540d6;
-  }
-  @media (prefers-color-scheme: dark) {
-    mark {
-      background-color: rgba(180, 165, 251, 0.2);
-      border-bottom-color: #b4a5fb;
-    }
-  }
-</style>
-
 <section class="mb-5">
   <h1 id="hero-heading">Software is built for <mark>people</mark>.</h1>
   <p class="lead">

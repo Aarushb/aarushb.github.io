@@ -1257,6 +1257,18 @@ EXTRA_HEAD_DATA = """
   vertical-align: -0.15em;
   margin-right: 0.25rem;
 }
+mark {
+  background-color: rgba(85, 64, 214, 0.14);
+  color: inherit;
+  padding: 0.08em 0.35em;
+  border-radius: 0.25rem;
+  border-bottom: 2px solid var(--site-accent);
+}
+@media (prefers-color-scheme: dark) {
+  mark {
+    background-color: rgba(180, 165, 251, 0.2);
+  }
+}
 </style>
 """
 
