@@ -218,12 +218,12 @@
       if (!announcer) return;
       if (announceClearTimer) clearTimeout(announceClearTimer);
       announcer.textContent = "";
-      requestAnimationFrame(() => {
+      setTimeout(() => {
         announcer.textContent = text;
         announceClearTimer = setTimeout(() => {
           announcer.textContent = "";
         }, 1500);
-      });
+      }, 50);
     }
 
     function updateToggleUI(isOn) {
